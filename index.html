@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joda Organika — E-shop na nový level</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#2A6640;--green-d:#1E4D2E;--green-l:#EAF3EC;--green-mid:#B8D9C0;
+  --gold:#8B6A14;--gold-l:#FDF6E3;
+  --white:#FFFFFF;--off:#F8FAF8;--navy:#1A2B1A;--grey:#5A6B5A;--border:#D4E5D8;
+}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--white);color:var(--navy);line-height:1.7;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+
+.wrap{max-width:940px;margin:0 auto;padding:0 2rem}
+section{padding:4.5rem 0}
+section.off{background:var(--off)}
+section.g-light{background:var(--green-l)}
+
+.label{font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--green);margin-bottom:.75rem;display:block}
+.divider{width:36px;height:2px;background:var(--green);margin:1.25rem 0}
+.divider.c{margin:1.25rem auto}
+h1,h2,h3{font-family:'Playfair Display',serif;line-height:1.2}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.97);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);padding:.875rem 2rem;display:flex;align-items:center;justify-content:space-between}
+.nav-l{font-weight:700;font-size:.85rem;color:var(--green);letter-spacing:.02em}
+.nav-r{font-size:.78rem;color:var(--grey)}
+
+/* HERO */
+#hero{min-height:85vh;display:flex;align-items:center;padding:7rem 0 4rem;background:var(--green-d);position:relative;overflow:hidden}
+.hero-pattern{position:absolute;inset:0;background:radial-gradient(circle at 80% 50%,rgba(42,102,64,.4) 0%,transparent 60%);pointer-events:none}
+.hero-inner{position:relative;z-index:1;max-width:620px}
+.hero-tag{display:inline-flex;align-items:center;gap:.5rem;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:2px;padding:.4rem 1rem;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:2rem}
+.hero-h1{font-size:clamp(2rem,4.5vw,3.25rem);font-weight:600;color:#fff;line-height:1.1;margin-bottom:1rem}
+.hero-h1 em{font-style:italic;font-weight:400;color:var(--green-mid)}
+.hero-sub{font-size:.95rem;color:rgba(255,255,255,.65);line-height:1.85;max-width:500px;margin-top:1rem}
+.hero-badges{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2.5rem}
+.badge{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:.5rem 1rem;font-size:.78rem;color:rgba(255,255,255,.8);font-weight:500}
+
+/* ADS REPORT */
+.report-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+@media(max-width:620px){.report-grid{grid-template-columns:1fr}}
+.report-card{border:1px solid var(--border);padding:1.75rem;background:var(--white);position:relative}
+.report-week{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--grey);margin-bottom:1.25rem;display:block}
+.r-metrics{display:grid;grid-template-columns:1fr 1fr;gap:.875rem}
+.r-m-v{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:600;color:var(--navy);line-height:1}
+.r-m-l{font-size:.68rem;color:var(--grey);margin-top:.2rem;text-transform:uppercase;letter-spacing:.06em}
+.r-badge{display:inline-block;margin-top:1.25rem;background:var(--green-l);border:1px solid var(--green-mid);padding:.35rem .875rem;font-size:.72rem;font-weight:700;color:var(--green);letter-spacing:.06em}
+.arrow-card{border:1px solid var(--border);background:var(--green-l);padding:1.5rem;display:flex;flex-direction:column;gap:.75rem;margin-top:1.5rem}
+.arrow-row{display:flex;align-items:center;gap:1rem;font-size:.85rem;color:var(--navy)}
+.arrow-row strong{font-weight:700}
+.arr{color:var(--green);font-size:1.1rem}
+.bottleneck{background:var(--gold-l);border:1px solid rgba(139,106,20,.25);padding:1.25rem 1.5rem;margin-top:1.5rem;font-size:.875rem;color:var(--navy);line-height:1.75}
+.bottleneck strong{color:var(--gold)}
+
+/* PROBLEMS */
+.prob-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);margin-top:2.5rem}
+@media(max-width:580px){.prob-grid{grid-template-columns:1fr}}
+.prob-box{background:var(--white);padding:1.75rem 1.5rem}
+.prob-num{font-family:'Playfair Display',serif;font-size:2rem;color:var(--green-mid);line-height:1;margin-bottom:.625rem}
+.prob-title{font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:.4rem}
+.prob-desc{font-size:.82rem;color:var(--grey);line-height:1.65}
+
+/* SCOPE */
+.scope-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+@media(max-width:620px){.scope-grid{grid-template-columns:1fr}}
+.scope-card{border:1px solid var(--border);padding:1.75rem;background:var(--white);position:relative}
+.scope-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--green)}
+.scope-title{font-size:.9rem;font-weight:700;color:var(--navy);margin-bottom:.875rem}
+.scope-list{list-style:none;display:flex;flex-direction:column;gap:.45rem}
+.scope-list li{font-size:.82rem;color:var(--grey);display:flex;gap:.6rem;line-height:1.5;align-items:flex-start}
+.scope-list li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;font-size:.78rem;margin-top:.1rem}
+
+/* RESULTS */
+.results-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-top:2.5rem}
+@media(max-width:560px){.results-row{grid-template-columns:1fr}}
+.res-box{background:var(--white);padding:2rem 1.5rem;text-align:center}
+.res-v{font-family:'Playfair Display',serif;font-size:2rem;font-weight:600;color:var(--green);line-height:1;margin-bottom:.5rem}
+.res-l{font-size:.78rem;color:var(--grey);text-transform:uppercase;letter-spacing:.08em}
+.res-note{font-size:.75rem;color:var(--grey);margin-top:.35rem;font-style:italic}
+
+/* PRICE */
+.price-box{border:2px solid var(--green);padding:3rem;max-width:600px;margin:2.5rem auto 0;text-align:center;position:relative}
+.price-box::before{content:'Cenová ponuka';position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--white);padding:0 1rem;font-size:.68rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+.price-v{font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:600;color:var(--navy);line-height:1}
+.price-note{font-size:.82rem;color:var(--grey);margin-top:.4rem}
+.price-list{list-style:none;display:flex;flex-direction:column;gap:.55rem;margin:2rem 0;text-align:left}
+.price-list li{font-size:.875rem;color:var(--grey);display:flex;gap:.65rem;align-items:flex-start}
+.price-list li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0}
+.price-or{border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:.875rem 0;margin:1.25rem 0;font-size:.82rem;color:var(--grey);text-align:center}
+
+/* PORTFOLIO */
+.port-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+@media(max-width:600px){.port-grid{grid-template-columns:1fr}}
+.port-card{border:1px solid var(--border);overflow:hidden}
+.port-top{background:var(--navy);padding:1.25rem 1.5rem}
+.port-brand{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.35rem}
+.port-name{font-family:'Playfair Display',serif;font-size:1.05rem;color:#fff;font-weight:400}
+.port-body{padding:1.5rem;background:var(--white)}
+.port-desc{font-size:.82rem;color:var(--grey);line-height:1.7;margin-bottom:1.25rem}
+.port-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.ptag{background:var(--green-l);border:1px solid var(--green-mid);padding:.2rem .65rem;font-size:.68rem;font-weight:600;color:var(--green);letter-spacing:.07em;text-transform:uppercase}
+.before-after{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);margin-top:1rem}
+.ba-side{background:var(--off);padding:.875rem;text-align:center}
+.ba-label{font-size:.65rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--grey);margin-bottom:.5rem}
+.ba-img{width:100%;height:120px;object-fit:cover;background:var(--border);display:flex;align-items:center;justify-content:center;font-size:.75rem;color:var(--grey)}
+
+/* NEXT STEPS */
+.steps{list-style:none;max-width:580px;margin-top:2rem}
+.step{display:flex;gap:1.5rem;padding:1.5rem 0;border-bottom:1px solid var(--border)}
+.step:last-child{border-bottom:none}
+.step-n{font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--green-mid);flex-shrink:0;width:1.5rem}
+.step h4{font-size:.875rem;font-weight:700;color:var(--navy);margin-bottom:.25rem}
+.step p{font-size:.8rem;color:var(--grey);line-height:1.6}
+
+/* FOOTER */
+#footer{background:var(--green-d);color:#fff;padding:4rem 0;text-align:center}
+#footer h2{font-family:'Playfair Display',serif;font-size:1.875rem;font-weight:400;margin-bottom:.875rem}
+#footer p{color:rgba(255,255,255,.5);font-size:.875rem;max-width:360px;margin:0 auto 2.5rem;line-height:1.75}
+.btn-w{display:inline-block;background:#fff;color:var(--green-d);padding:.875rem 2.5rem;font-size:.83rem;font-weight:700;letter-spacing:.04em;transition:background .2s}
+.btn-w:hover{background:var(--green-mid)}
+.foot-info{margin-top:3rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1);font-size:.72rem;color:rgba(255,255,255,.3);line-height:2}
+
+/* SEC HEADER */
+.sec-hdr{margin-bottom:2.5rem}
+.sec-hdr h2{font-size:clamp(1.6rem,3vw,2.25rem);font-weight:600;color:var(--navy)}
+.sec-hdr p{font-size:.875rem;color:var(--grey);margin-top:.625rem;max-width:520px;line-height:1.8}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-l">Joda Organika × Dolphin Wave Media</div>
+  <div class="nav-r">E-shop proposal · 2026</div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-pattern"></div>
+  <div class="wrap">
+    <div class="hero-inner">
+      <div class="hero-tag">E-shop optimalizácia · 2026</div>
+      <h1 class="hero-h1">Ako posunúť<br><em>Joda Organika</em><br>e-shop na nový level</h1>
+      <p class="hero-sub">Reklamy bežia. Ľudia klikajú. Konverzie zaostávajú. Problém nie je v reklamách — problém je na webe. Tu je plán, čo s tým urobíme.</p>
+      <div class="hero-badges">
+        <div class="badge">Custom redesign</div>
+        <div class="badge">Upsell systém</div>
+        <div class="badge">Automatizácia procesov</div>
+        <div class="badge">SEO základ</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ADS CONTEXT -->
+<section>
+  <div class="wrap">
+    <div class="sec-hdr">
+      <span class="label">Kontext — Meta Ads</span>
+      <h2>Reklamy rastú. Web nestíha.</h2>
+      <p>Za dva týždne sa výkon kampane zlepšil 6× — ale konverzný pomer e-shopu je stále úzke hrdlo.</p>
+    </div>
+    <div class="report-grid">
+      <div class="report-card">
+        <span class="report-week">Týždeň 1 · 20–26. 04.</span>
+        <div class="r-metrics">
+          <div><div class="r-m-v">10 021</div><div class="r-m-l">Zobrazení</div></div>
+          <div><div class="r-m-v">134</div><div class="r-m-l">Kliknutí</div></div>
+          <div><div class="r-m-v">€0,57</div><div class="r-m-l">CPC</div></div>
+          <div><div class="r-m-v">1</div><div class="r-m-l">Nákup</div></div>
+        </div>
+        <div class="r-badge">Cena/nákup: €76,90 · Fáza učenia</div>
+      </div>
+      <div class="report-card">
+        <span class="report-week">Týždeň 2 · 27. 04. – 03. 05.</span>
+        <div class="r-metrics">
+          <div><div class="r-m-v">13 556</div><div class="r-m-l">Zobrazení</div></div>
+          <div><div class="r-m-v">7 366</div><div class="r-m-l">Oslovených</div></div>
+          <div><div class="r-m-v">€17,14</div><div class="r-m-l">Cena/nákup</div></div>
+          <div><div class="r-m-v">6</div><div class="r-m-l">Nákupov</div></div>
+        </div>
+        <div class="r-badge">ROAS ~5,8× · Spend €102,81</div>
+      </div>
+    </div>
+    <div class="arrow-card">
+      <div class="arrow-row"><strong>Nákupy:</strong> <span>1</span> <span class="arr">→</span> <strong>6</strong> <span style="font-size:.75rem;color:var(--green);font-weight:700">(+500 %)</span></div>
+      <div class="arrow-row"><strong>Cena/nákup:</strong> <span>€76,90</span> <span class="arr">→</span> <strong>€17,14</strong> <span style="font-size:.75rem;color:var(--green);font-weight:700">(–78 %)</span></div>
+      <div class="arrow-row"><strong>Spend:</strong> €102,81 &nbsp;·&nbsp; <strong>Odh. ROAS: ~5,8×</strong></div>
+    </div>
+    <div class="bottleneck">
+      <strong>Problém identifikovaný:</strong> Algoritmus sa stále nachádza vo fáze učenia — potrebuje viac konverzií na stabilizáciu. Na to, aby Meta mohla správne optimalizovať, musí e-shop sám konvertovať lepšie. <strong>Úzke hrdlo je na strane webu, nie reklamy.</strong>
+    </div>
+  </div>
+</section>
+
+<!-- PROBLÉMY -->
+<section class="g-light">
+  <div class="wrap">
+    <div class="sec-hdr">
+      <span class="label">Čo na webe nefunguje</span>
+      <h2>6 vecí, ktoré blokujú rast</h2>
+    </div>
+    <div class="prob-grid">
+      <div class="prob-box">
+        <div class="prob-num">01</div>
+        <div class="prob-title">Slabý dizajn & prvý dojem</div>
+        <div class="prob-desc">Návštevník si urobí názor za 3 sekundy. Aktuálny dizajn nepôsobí dôveryhodne a nezodpovedá úrovni produktu.</div>
+      </div>
+      <div class="prob-box">
+        <div class="prob-num">02</div>
+        <div class="prob-title">Málo produktových fotografií</div>
+        <div class="prob-desc">Jedna fotka nestačí. Zákazník potrebuje vidieť produkt z viacerých uhlov, v kontexte, s detailom. Dnes sa dajú AI fotky generovať rýchlo a lacno.</div>
+      </div>
+      <div class="prob-box">
+        <div class="prob-num">03</div>
+        <div class="prob-title">Chýba upsell</div>
+        <div class="prob-desc">Predávate trojbalenia — to je výborné. Ale chýba ponuka: „kúp 4. kus za ešte výhodnejšiu cenu." Jednoduchý upsell vie zvýšiť AOV o 20–40 %.</div>
+      </div>
+      <div class="prob-box">
+        <div class="prob-num">04</div>
+        <div class="prob-title">Nejasná value proposition</div>
+        <div class="prob-desc">Prečo práve Joda Organika? Klinická štúdia, slovenský výrobca, organický jód — toto musí byť viditeľné hneď na prvej obrazovke.</div>
+      </div>
+      <div class="prob-box">
+        <div class="prob-num">05</div>
+        <div class="prob-title">Chýba automatizácia</div>
+        <div class="prob-desc">Manuálne vystavovanie faktúr, ručné robenie štítkov, sledovanie objednávok. Stráca sa čas, ktorý by mal ísť do rastu.</div>
+      </div>
+      <div class="prob-box">
+        <div class="prob-num">06</div>
+        <div class="prob-title">SEO základ chýba</div>
+        <div class="prob-desc">Meta títles, descriptions, štruktúra URL, alt texty — základné nastavenia, ktoré privádzajú organickú návštevnosť bez platby za reklamu.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ČO UROBÍME -->
+<section class="off">
+  <div class="wrap">
+    <div class="sec-hdr">
+      <span class="label">Rozsah prác</span>
+      <h2>Čo konkrétne urobíme</h2>
+    </div>
+    <div class="scope-grid">
+      <div class="scope-card">
+        <div class="scope-title">Dizajn & frontend</div>
+        <ul class="scope-list">
+          <li>Nový header, footer, homepage layout</li>
+          <li>Produktová stránka — štruktúra, CTA, dôveryhodnosť</li>
+          <li>Kategóriová stránka — prehľadnosť</li>
+          <li>Mobilná optimalizácia</li>
+          <li>Custom kód (600+ riadkov)</li>
+        </ul>
+      </div>
+      <div class="scope-card">
+        <div class="scope-title">Predajný systém</div>
+        <ul class="scope-list">
+          <li>Upsell — 4. produkt za výhodnejšiu cenu</li>
+          <li>Cross-sell — súvisiace produkty</li>
+          <li>Odporúčané produkty na karte</li>
+          <li>Jasná hodnotová ponuka na homepage</li>
+          <li>Trust badges (klinická štúdia, SK výrobca)</li>
+        </ul>
+      </div>
+      <div class="scope-card">
+        <div class="scope-title">Automatizácia procesov</div>
+        <ul class="scope-list">
+          <li>Automatické vystavovanie faktúr</li>
+          <li>Automatické generovanie štítkov</li>
+          <li>Notifikácie o objednávkach</li>
+          <li>Sledovanie zásob</li>
+          <li>Prípadne migrácia na Shoptet</li>
+        </ul>
+      </div>
+      <div class="scope-card">
+        <div class="scope-title">Technické & SEO</div>
+        <ul class="scope-list">
+          <li>Základná SEO optimalizácia</li>
+          <li>Meta titulky a popisy</li>
+          <li>Štruktúra URL a alt texty</li>
+          <li>Rýchlosť načítania (Core Web Vitals)</li>
+          <li>Prepojenie s Google Analytics</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VÝSLEDKY -->
+<section>
+  <div class="wrap">
+    <div class="sec-hdr">
+      <span class="label">Čo to prinesie</span>
+      <h2>Merateľné výsledky</h2>
+      <p>Na základe skúseností z podobných projektov — konzervatívne odhady po optimalizácii e-shopu.</p>
+    </div>
+    <div class="results-row">
+      <div class="res-box">
+        <div class="res-v">2–3×</div>
+        <div class="res-l">Konverzný pomer</div>
+        <div class="res-note">z tej istej návštevnosti</div>
+      </div>
+      <div class="res-box">
+        <div class="res-v">+20–40%</div>
+        <div class="res-l">AOV (priem. objednávka)</div>
+        <div class="res-note">vďaka upsell systému</div>
+      </div>
+      <div class="res-box">
+        <div class="res-v">↓ CPP</div>
+        <div class="res-l">Cena za nákup</div>
+        <div class="res-note">Meta sa dostane z fázy učenia</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CENA -->
+<section class="g-light">
+  <div class="wrap" style="text-align:center">
+    <span class="label" style="display:block;text-align:center">Investícia</span>
+    <h2 class="serif" style="font-family:'Playfair Display',serif;font-size:1.875rem;font-weight:600;color:var(--navy)">Transparentná cena, jasný rozsah</h2>
+    <div class="price-box">
+      <div class="price-v">2 000 €</div>
+      <div class="price-note">jednorazová platba · celkový rozsah</div>
+      <ul class="price-list">
+        <li>Kompletný redesign e-shopu (header, footer, homepage, produktová stránka)</li>
+        <li>Upsell &amp; cross-sell systém</li>
+        <li>Automatizácia procesov (faktúry, štítky, objednávky)</li>
+        <li>Základná SEO optimalizácia</li>
+        <li>Produktové fotografie (AI-generované, pripravené na použitie)</li>
+        <li>Technická podpora po nasadení (30 dní)</li>
+      </ul>
+      <div class="price-or">Platforma: úprava existujúceho systému <strong>alebo</strong> migrácia na Shoptet</div>
+      <p style="font-size:.8rem;color:var(--grey);line-height:1.7">Výsledkom je e-shop, ktorý konvertuje — a umožní Meta reklame naplno pracovať.</p>
+    </div>
+  </div>
+</section>
+
+<!-- UKÁŽKY PRÁCE -->
+<section class="off">
+  <div class="wrap">
+    <div class="sec-hdr">
+      <span class="label">Naše projekty</span>
+      <h2>Ukážky práce</h2>
+      <p>Príklady e-shopov, kde sme robili podobné úpravy — dizajn, kód, predajný systém.</p>
+    </div>
+    <div class="port-grid">
+      <div class="port-card">
+        <div class="port-top">
+          <div class="port-brand">Kozmetika & parfumy · SK/CZ</div>
+          <div class="port-name">Aura Essence</div>
+        </div>
+        <div class="port-body">
+          <p class="port-desc">Kompletný redesign produktovej stránky, footer, navigácia. Pridanie kódu pre lepšiu štruktúru, dôveryhodnosť a mobilný výkon.</p>
+          <div class="port-tags">
+            <span class="ptag">Custom kód</span>
+            <span class="ptag">Produktový detail</span>
+            <span class="ptag">Footer</span>
+            <span class="ptag">Mobile</span>
+          </div>
+          <div style="margin-top:1.25rem;background:var(--green-l);border:1px solid var(--green-mid);padding:.875rem 1.1rem;font-size:.8rem;color:var(--grey);line-height:1.65">
+            <strong style="color:var(--navy)">Pred:</strong> Základná šablóna, slabý dizajn, žiadna štruktúra produktovej stránky.<br>
+            <strong style="color:var(--navy)">Po:</strong> Čistý moderný dizajn, jasná value prop, optimalizovaná konverzná cesta.
+          </div>
+        </div>
+      </div>
+      <div class="port-card">
+        <div class="port-top">
+          <div class="port-brand">E-shop · Shoptet Apollo šablóna</div>
+          <div class="port-name">Shoptet projekt</div>
+        </div>
+        <div class="port-body">
+          <p class="port-desc">Inštalácia Apollo šablóny, custom kód pre footer, sekciu značiek, O nás. SEO nastavenia, mobilná optimalizácia, 600+ riadkov kódu.</p>
+          <div class="port-tags">
+            <span class="ptag">Shoptet</span>
+            <span class="ptag">Apollo</span>
+            <span class="ptag">Custom kód</span>
+            <span class="ptag">SEO</span>
+          </div>
+          <ul style="list-style:none;margin-top:1.25rem;display:flex;flex-direction:column;gap:.4rem">
+            <li style="font-size:.8rem;color:var(--grey);display:flex;gap:.5rem"><span style="color:var(--green);font-weight:700">✓</span>Sekcia Značky — custom code namiesto bannerov</li>
+            <li style="font-size:.8rem;color:var(--grey);display:flex;gap:.5rem"><span style="color:var(--green);font-weight:700">✓</span>Sekcia O nás — moderný layout text + foto</li>
+            <li style="font-size:.8rem;color:var(--grey);display:flex;gap:.5rem"><span style="color:var(--green);font-weight:700">✓</span>Jednotný footer, ikony na mieru</li>
+            <li style="font-size:.8rem;color:var(--grey);display:flex;gap:.5rem"><span style="color:var(--green);font-weight:700">✓</span>600+ riadkov custom kódu</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Automation reference -->
+    <div style="border:1px solid var(--border);padding:2rem;margin-top:1.5rem;background:var(--white)">
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:start">
+        <div style="background:var(--green-l);border:1px solid var(--green-mid);padding:.875rem 1.25rem;text-align:center;min-width:120px">
+          <div style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--green);font-weight:600">100%</div>
+          <div style="font-size:.68rem;color:var(--grey);text-transform:uppercase;letter-spacing:.08em;margin-top:.2rem">Auto</div>
+        </div>
+        <div>
+          <div style="font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--grey);margin-bottom:.4rem">Referencia automatizácie · Bomba Zľava</div>
+          <div style="font-size:.85rem;font-weight:700;color:var(--navy);margin-bottom:.35rem">Príde objednávka → vystaví sa faktúra → vytvorí sa štítok → odošle sa notifikácia</div>
+          <div style="font-size:.8rem;color:var(--grey);line-height:1.65">Klient nemusí robiť nič ručne. Presne takto to nastavíme aj pre Joda Organika.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEXT STEPS -->
+<section>
+  <div class="wrap">
+    <div class="sec-hdr">
+      <span class="label">Ďalší postup</span>
+      <h2>Ako začneme</h2>
+    </div>
+    <ol class="steps">
+      <li class="step">
+        <div class="step-n">01</div>
+        <div><h4>Odsúhlasenie ponuky</h4><p>Potvrdíte záujem, odsúhlasíme rozsah a podpíšeme jednoduchú zmluvu.</p></div>
+      </li>
+      <li class="step">
+        <div class="step-n">02</div>
+        <div><h4>Prístupy & audit</h4><p>Dostaneme prístupy do administrácie e-shopu a Google Analytics. Urobíme audit konverznej cesty a košíka.</p></div>
+      </li>
+      <li class="step">
+        <div class="step-n">03</div>
+        <div><h4>Realizácia (2–3 týždne)</h4><p>Dizajn, kód, upsell systém, automatizácia. Priebežne komunikujeme cez Basecamp.</p></div>
+      </li>
+      <li class="step">
+        <div class="step-n">04</div>
+        <div><h4>Spustenie + Meta optimalizácia</h4><p>Po nasadení nového e-shopu upravíme kampane — algoritmus dostane konverzie, ktoré potrebuje na výstup z fázy učenia.</p></div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<section id="footer">
+  <div class="wrap" style="text-align:center">
+    <h2>Začneme, keď budete pripravení.</h2>
+    <p>Váš produkt si zaslúži e-shop, ktorý predáva rovnako dobre ako on sám.</p>
+    <a href="https://calendly.com/dolphinwave-media/30min" target="_blank" class="btn-w">Dohodnúť spoluprácu</a>
+    <div class="foot-info">
+      Joda Organika × Dolphin Wave Media · 2026<br>
+      Damián Drahovský · damiandrahovsky@gmail.com · +421 915 327 052
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
