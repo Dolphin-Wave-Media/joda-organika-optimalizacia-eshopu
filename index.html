@@ -99,6 +99,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
 /* PORTFOLIO */
 .port-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
 @media(max-width:600px){.port-grid{grid-template-columns:1fr}}
+.vid-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:2.5rem}
+@media(max-width:700px){.vid-grid{grid-template-columns:1fr;max-width:340px;margin-left:auto;margin-right:auto}}
+.vid-card{border:1px solid var(--border);background:var(--white);overflow:hidden}
+.vid-card video{display:block;width:100%;height:auto;aspect-ratio:9/16;background:#000}
 .port-card{border:1px solid var(--border);overflow:hidden}
 .port-top{background:var(--navy);padding:1.25rem 1.5rem}
 .port-brand{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:.35rem}
@@ -411,6 +415,56 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,
     </div>
   </div>
 </section>
+
+<!-- AI KREATIVY -->
+<section>
+  <div class="wrap">
+    <div class="sec-hdr">
+      <span class="label">Ukážka pre Joda Organika</span>
+      <h2>AI kreatívy</h2>
+      <p>Tri reklamné videá vytvorené pre Joda Organika — pripravené na nasadenie do kampaní.</p>
+    </div>
+    <div class="vid-grid">
+      <div class="vid-card">
+        <video preload="metadata" controls playsinline poster="videos/joda-ad-1-poster.jpg" width="1080" height="1920">
+          <source src="videos/joda-ad-1.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="vid-card">
+        <video preload="metadata" controls playsinline poster="videos/joda-ad-2-poster.jpg" width="1080" height="1920">
+          <source src="videos/joda-ad-2.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="vid-card">
+        <video preload="metadata" controls playsinline poster="videos/joda-ad-3-poster.jpg" width="1080" height="1920">
+          <source src="videos/joda-ad-3.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+// Progresívne prednačítanie: kým je sekcia mimo obrazovky, sťahujú sa len
+// metadáta (poster je samostatný JPG, vidno ho okamžite); keď sa videá blížia
+// do viewportu, prepne sa preload=auto a prehliadač si stiahne začiatok videa,
+// takže play je okamžitý. Keď hrá jedno video, ostatné sa pauznú.
+(function(){
+  var vids = document.querySelectorAll('.vid-card video');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting) { e.target.preload = 'auto'; io.unobserve(e.target); }
+      });
+    }, { rootMargin: '400px' });
+    vids.forEach(function(v){ io.observe(v); });
+  }
+  vids.forEach(function(v){
+    v.addEventListener('play', function(){
+      vids.forEach(function(o){ if (o !== v) o.pause(); });
+    });
+  });
+})();
+</script>
 
 <!-- NEXT STEPS -->
 <section>
